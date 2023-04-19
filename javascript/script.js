@@ -53,30 +53,23 @@ class CarritoController {
         this.listaCarrito = []
         this.contenedor_carrito = document.getElementById("contenedor_carrito");
         this.calculo_total = document.getElementById("total");
-        //this.sumatoria_total = 0
     }
 
     guardarEnStorage(){
         let listaCarritoJSON = JSON.stringify(this.listaCarrito);
         localStorage.setItem("listaCarrito", listaCarritoJSON);
-
-        //let precioTotalJSON = JSON.stringify(this.sumatoria_total);
-        //localStorage.setItem("sumatoria_total", precioTotalJSON)
     }
 
     verificarExistenciaEnStorage(){
         this.listaCarrito = JSON.parse(localStorage.getItem("listaCarrito")) || []; 
-        //this.sumatoria_total = JSON.parse(localStorage.getItem("sumatoria_total")) || 0; 
 
         if(this.listaCarrito.length > 0){
             this.mostrarEnDom()
-            //this.precioTotal()
         }
     }
 
     limpiarCarritoEnStorage(){
         localStorage.removeItem("listaCarrito")
-        //localStorage.removeItem("sumatoria_total")
     }
 
     agregar(producto) {
@@ -118,7 +111,6 @@ class CarritoController {
     }
 
     precioTotal() {
-        //this.calculo_total.innerHTML = "";
         let sumatoria_total = 0
     
         for(let i = 0 ; i < this.listaCarrito.length; i++) {
@@ -126,25 +118,11 @@ class CarritoController {
         }
 
         return sumatoria_total
-    
-        //this.calculo_total.innerHTML = `Total de tu compra: $${sumatoria_total}`;
     }   
     
     mostrarTotalEnDom() {
         this.calculo_total.innerHTML = this.precioTotal()
-    }
-
-    // precioTotal() {
-    //     this.calculo_total.innerHTML = "";
-
-    //     let sumatoria = 0
-    
-    //     for(let i = 0 ; i < this.listaCarrito.length; i++) {
-    //         sumatoria += this.listaCarrito[i].precio * this.listaCarrito[i].cantidad;
-    //     }
-    
-    //     this.calculo_total.innerHTML += `Total de tu compra: $${sumatoria}`;
-    // }    
+    }    
 }
 
 const controladorProductos = new ProductoController();
@@ -207,12 +185,9 @@ function quitarProducto(id) {
 }
 
 function pagar() {
-    //está en DOM
     controladorCarrito.limpiar()
-    //agregar limpiar el precio total del carrito
-    //está en localStorage
     controladorCarrito.limpiarCarritoEnStorage()
-    //está en listaCarrito
+    
     controladorCarrito.listaCarrito = []
     controladorCarrito.contenedor_carrito.innerHTML = "Su compra se realizó exitosamente :)"
 }
